@@ -7,8 +7,6 @@ using namespace std;
 
 int main()
 {
-    TwoStackFixed<int> stack1(10, 5);
-    TwoStackOptimal <int> opt(10);
     stack<int> A;
     stack<int> B;
     stack<int> C;
@@ -16,7 +14,7 @@ int main()
     {
         A.push(i);
     }
-    showTowerStates(A.size()-1, A, B, C);
+    showTowerStates(3, A, B, C);
     // cout << "Stack 1 is empty: " << stack1.isEmptyStack1() << endl;
     // cout << "Stack 2 is empty: " << stack1.isEmptyStack2() << endl;
     // cout << "Stack 1 is full:" << stack1.isFullStack1() << endl;

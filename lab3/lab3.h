@@ -300,61 +300,30 @@ class TwoStackOptimal
         cout << endl;
     }; //to display contents of array.
 };
+
+
 template <typename T>
-void moveAtoB (stack<T>& FROM, stack<T> &TO);
+void moveAtoB (int n, stack<T>& A, stack<T>& B, stack<T>& C, char a = ' ', char b = ' ' , char c = ' ')
+{
+    //cout << "......" << endl;
+    if (n > 0)
+    {
+        moveAtoB(n-1, A, C ,B, a, c, b );
+        cout << "Moved " << A.top() << " from peg " << a << " to " << c;
+        C.push(A.top());
+        A.pop();
+        moveAtoB(n-1, B, A, C, b, a, c);
+        
+    }
+    
+}
+
+
 template <typename T>
 void showTowerStates(int n, stack<T>& A, stack<T>& B, stack<T>& C)
 {   
-    
-    static stack<T>* Aname;
-    static stack<T>* Bname;
-    static stack<T>* Cname;
-    
-    static int a = 0;
-    if (a == 0)
-    {
-        a++;
-        Aname = &A;
-        Bname = &B;
-        Cname = &C;
-    }
-    if (n == 0)
-    {
-        return;
-    }
-    if (n >= 1)
-    {
-       
-        showTowerStates(n-1, A, B , C);
-        if (&A == Aname )
-        {
-            string a = "A";
-            if (&C == Cname)
-            {
-                string c = "C";
-                cout << "Moved " << A.top() << " from peg " << a << " to " << c << endl;
-                moveAtoB(A,C);
-                
-            }
-            if (&B == Bname)
-            {
-                string b = "B";
-                cout << "Moved " << A.top() << " from peg " << a << " to " << b << endl;
-                moveAtoB(A,B);
-            }
-        }
-        
-        //cout << "Moved " << n << " from peg " << s << " to " << s << endl;
-        
-        
-        showTowerStates(n-1, B, C, A);
-    }
+    moveAtoB(n, A, B, C, 'A', 'B', 'C');
 };
-template <typename T>
-void moveAtoB (stack<T>& FROM, stack<T> &TO)
-{
-    TO.push(FROM.top());
-    FROM.pop();
-}
+
 
 #endif
